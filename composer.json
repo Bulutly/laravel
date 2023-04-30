@@ -14,5 +14,12 @@
             "email": "arashrasoulzadeh@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bulutly\\Laravel\\Providers\\BulutlyServiceProvider"
+            ]
+        }
+    }
 }

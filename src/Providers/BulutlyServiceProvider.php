@@ -4,7 +4,7 @@ namespace Bulutly\Laravel\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class WerifyIDServiceProvider extends ServiceProvider
+class BulutlyServiceProvider extends ServiceProvider
 {
 	public function boot()
 	{

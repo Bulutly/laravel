@@ -6,6 +6,7 @@ class ListDropletsJob extends BaseJob
 {
 	public  function  handle()
 	{
+		dd(config('bulutly'));
 		$path = $this->generateUrl(config('bulutly.api.droplets.index'));
 		$request = $this->get($path);
 
