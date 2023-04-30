@@ -8,7 +8,8 @@ class BaseJob
 {
 	public function generateUrl(string $path): string
 	{
-		return config('bulutly.api.base_api_path') . '/' . config('bulutly.version') . '/' . $path;
+
+		return config('bulutly.api.base_api_path') . '/' . $path;
 	}
 
 	public function post($path, $payload, $token = null)
