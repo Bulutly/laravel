@@ -5,9 +5,9 @@ use Bulutly\Laravel\Repositories\Contracts\BaseRequest;
 
 class StoreJob extends BaseRequest
 {
-    public $data;
+    public $data, $key;
 
-    public function __construct(array $data)
+    public function __construct(array $data, $key = null)
     {
         if (isset($data['project_id'])) $this->data['project_id'] = $data['project_id'];
         $this->data['image_id'] = $data['image_id'];
@@ -20,12 +20,13 @@ class StoreJob extends BaseRequest
         $this->data['auto_scale_memory'] = $data['auto_scale_memory'];
         $this->data['tags'] = $data['tags'];
         $this->data['startup_script'] = $data['startup_script'];
+        $this->key = $key;
     }
 
     public function handle(){
         try{
             $endpoint = $this->generateApiUrl(config('bulutly.api.endpoints.buluts.store'));
-            $req = $this->post($endpoint, $this->data);
+            $req = $this->post($endpoint, $this->data, null, $this->key);
             if ($req->status() === 200 or $req->status() === 201) return $req->json();
             throw new \Exception($req->json()['message']);
         }catch (\Exception $e){

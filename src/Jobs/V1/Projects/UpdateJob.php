@@ -5,12 +5,12 @@ use Bulutly\Laravel\Repositories\Contracts\BaseRequest;
 
 class UpdateJob extends BaseRequest
 {
-    public $uuid, $data;
+    public $uuid, $data, $key;
 
     /**
      * @throws \Exception
      */
-    public function __construct(string $uuid, array $data)
+    public function __construct(string $uuid, array $data, $key = null)
     {
         $this->uuid = $uuid;
         if (empty($data)) throw new \Exception('No data provided');
@@ -19,13 +19,14 @@ class UpdateJob extends BaseRequest
         if(!empty($data['url'])) $this->data['url'] = $data['url'];
         if(!empty($data['github'])) $this->data['github'] = $data['github'];
         if(!empty($data['tags'])) $this->data['tags'] = $data['tags'];
+        $this->key = $key;
     }
 
     public function handle(){
         try{
             $endpoint = $this->generateApiUrl(config('bulutly.api.endpoints.projects.update'));
             str_replace('{uuid}', $this->uuid, $endpoint);
-            $req = $this->put($endpoint, $this->data);
+            $req = $this->put($endpoint, $this->data, null, $this->key);
             if ($req->status() === 200) return $req->json();
             throw new \Exception($req->json()['message']);
         }catch (\Exception $e){
