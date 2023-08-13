@@ -42,9 +42,7 @@ abstract class BaseRequest
             'content-type' => 'application/json',
         ];
         $headers['X-BULUTLY-API'] = $key ?? config('bulutly.api.key');
-        if ($token) {
-            $headers['Authorization'] = 'Bearer '.$token;
-        }
+        if ($token) $headers['Authorization'] = 'Bearer '.$token;
         return $headers;
     }
 

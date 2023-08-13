@@ -6,17 +6,18 @@ use Bulutly\Laravel\Repositories\Contracts\BaseRequest;
 class ShowJob extends BaseRequest
 {
 
-    public $uuid;
+    public $uuid, $key;
 
-    public function __construct(string $uuid)
+    public function __construct(string $uuid, $key = null)
     {
         $this->uuid = $uuid;
+        $this->key = $key;
     }
     public function handle(){
         try{
             $endpoint = $this->generateApiUrl(config('bulutly.api.endpoints.buluts.show'));
             str_replace('{uuid}', $this->uuid, $endpoint);
-            $req = $this->get($endpoint);
+            $req = $this->get($endpoint, null, $this->key);
             if ($req->status() === 200) return $req->json();
             throw new \Exception($req->json()['message']);
         }catch (\Exception $e){
