@@ -5,12 +5,13 @@ use Bulutly\Laravel\Repositories\Contracts\BaseRequest;
 
 class DeleteJob extends BaseRequest
 {
-    public $uuid, $env_uuid;
+    public $uuid, $env_uuid, $key;
 
-    public function __construct(string $uuid, string $env_uuid)
+    public function __construct(string $uuid, string $env_uuid, $key = null)
     {
         $this->uuid = $uuid;
         $this->env_uuid = $env_uuid;
+        $this->key = $key;
     }
 
     public function handle(){
@@ -18,7 +19,7 @@ class DeleteJob extends BaseRequest
             $endpoint = $this->generateApiUrl(config('bulutly.api.endpoints.buluts.envs.delete'));
             str_replace('{uuid}', $this->uuid, $endpoint);
             str_replace('{env_uuid}', $this->env_uuid, $endpoint);
-            $req = $this->delete($endpoint);
+            $req = $this->delete($endpoint, null, $this->key);
             if ($req->status() === 200) return $req->json();
             throw new \Exception($req->json()['message']);
         }catch (\Exception $e){

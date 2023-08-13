@@ -9,7 +9,7 @@ class StoreJob extends BaseRequest
 
     public function __construct(array $data)
     {
-        $this->data['project_id'] = $data['project_id'];
+        if (isset($data['project_id'])) $this->data['project_id'] = $data['project_id'];
         $this->data['image_id'] = $data['image_id'];
         $this->data['memory'] = $data['memory'];
         $this->data['cpu'] = $data['cpu'];

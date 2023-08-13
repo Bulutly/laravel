@@ -5,27 +5,27 @@ use Illuminate\Support\Facades\Http;
 
 abstract class BaseRequest
 {
-    public function post($path, $payload = null, $token = null)
+    public function post($path, $payload = null, $token = null, $key = null)
     {
-        if ($payload === null) return Http::withHeaders($this->getHeaders($token))->post($path);
-        return Http::withHeaders($this->getHeaders($token))->post($path, $payload);
+        if ($payload === null) return Http::withHeaders($this->getHeaders($token, $key))->post($path);
+        return Http::withHeaders($this->getHeaders($token, $key))->post($path, $payload);
     }
 
-    public function put($path, $payload = null, $token = null)
+    public function put($path, $payload = null, $token = null, $key = null)
     {
-        if ($payload === null) return Http::withHeaders($this->getHeaders($token))->put($path);
-        return Http::withHeaders($this->getHeaders($token))->put($path, $payload);
+        if ($payload === null) return Http::withHeaders($this->getHeaders($token, $key))->put($path);
+        return Http::withHeaders($this->getHeaders($token, $key))->put($path, $payload);
     }
 
-    public function delete($path, $payload = null, $token = null)
+    public function delete($path, $payload = null, $token = null, $key = null)
     {
-        if ($payload === null) return Http::withHeaders($this->getHeaders($token))->delete($path);
-        return Http::withHeaders($this->getHeaders($token))->delete($path, $payload);
+        if ($payload === null) return Http::withHeaders($this->getHeaders($token, $key))->delete($path);
+        return Http::withHeaders($this->getHeaders($token, $key))->delete($path, $payload);
     }
 
-    public function get($path, $token = null)
+    public function get($path, $token = null, $key = null)
     {
-        return Http::withHeaders($this->getHeaders($token))->get($path);
+        return Http::withHeaders($this->getHeaders($token, $key))->get($path);
     }
 
     public function generateApiUrl(string $path): string
@@ -35,14 +35,13 @@ abstract class BaseRequest
 
     }
 
-    public function getHeaders($token = null): array
+    public function getHeaders($token = null, $key = null): array
     {
-        $headers =
-            [
-                'accept' => 'application/json',
-                'content-type' => 'application/json',
-                'X-BULUTLY-API' => config('bulutly.api.key'),
-            ];
+        $headers = [
+            'accept' => 'application/json',
+            'content-type' => 'application/json',
+        ];
+        $headers['X-BULUTLY-API'] = $key ?? config('bulutly.api.key');
         if ($token) {
             $headers['Authorization'] = 'Bearer '.$token;
         }
