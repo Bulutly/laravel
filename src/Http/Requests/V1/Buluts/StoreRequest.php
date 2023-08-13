@@ -16,7 +16,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_id' => 'required|uuid',
+            'project_id' => 'nullable|uuid',
             'image_id' => 'required|uuid',
             'memory' => 'nullable|integer',
             'cpu' => 'nullable|integer',
