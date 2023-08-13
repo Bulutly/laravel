@@ -1,7 +1,7 @@
 <?php
-namespace App\Enums\Bulut;
+namespace Bulutly\Laravel\Enums\Bulut;
 
-use App\Enums\EnumTrait;
+use Bulutly\Laravel\Enums\EnumTrait;
 
 enum CPU: int
 {
