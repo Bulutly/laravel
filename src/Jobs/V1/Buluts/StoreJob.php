@@ -11,15 +11,15 @@ class StoreJob extends BaseRequest
     {
         if (isset($data['project_id'])) $this->data['project_id'] = $data['project_id'];
         $this->data['image_id'] = $data['image_id'];
-        $this->data['memory'] = $data['memory'];
-        $this->data['cpu'] = $data['cpu'];
-        $this->data['name'] = $data['name'];
-        $this->data['region'] = $data['region'];
-        $this->data['description'] = $data['description'];
-        $this->data['auto_scale_cpu'] = $data['auto_scale_cpu'];
-        $this->data['auto_scale_memory'] = $data['auto_scale_memory'];
-        $this->data['tags'] = $data['tags'];
-        $this->data['startup_script'] = $data['startup_script'];
+        if (isset($data['memory'])) $this->data['memory'] = $data['memory'];
+        if (isset($data['cpu'])) $this->data['cpu'] = $data['cpu'];
+        if (isset($data['name'])) $this->data['name'] = $data['name'];
+        if (isset($data['region'])) $this->data['region'] = $data['region'];
+        if (isset($data['description'])) $this->data['description'] = $data['description'];
+        if (isset($data['auto_scale_cpu'])) $this->data['auto_scale_cpu'] = $data['auto_scale_cpu'];
+        if (isset($data['auto_scale_memory'])) $this->data['auto_scale_memory'] = $data['auto_scale_memory'];
+        if (isset($data['tags'])) $this->data['tags'] = $data['tags'];
+        if (isset($data['startup_script'])) $this->data['startup_script'] = $data['startup_script'];
         $this->key = $key;
     }
 
