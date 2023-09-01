@@ -36,6 +36,20 @@ return [
             'images' => [
                 'index' => 'images',
             ],
+            'terminals' => [
+                'index' => 'terminals',
+                'store' => 'terminals',
+                'delete' => 'terminals/{uuid}',
+                'setting' => [
+                    'show' => 'terminals/{uuid}/setting',
+                    'update' => 'terminals/{uuid}/setting',
+                ],
+                'experts' => [
+                    'index' => 'terminals/{uuid}/experts',
+                    'store' => 'terminals/{uuid}/experts',
+                    'delete' => 'terminals/{uuid}/experts/{expert_uuid}',
+                ],
+            ]
         ]
     ],
 
