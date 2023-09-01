@@ -42,7 +42,7 @@ abstract class BaseRequest
             'content-type' => 'application/json',
         ];
         $headers['X-BULUTLY-API'] = $key ?? config('bulutly.api.key');
-        if ($token) $headers['Authorization'] = 'Bearer '.$token;
+        $headers['Authorization'] = 'Bearer '.$token ? $token : session::driver(config('waccount.session.driver'))->get(config('waccount.session.variable'));
         return $headers;
     }
 
