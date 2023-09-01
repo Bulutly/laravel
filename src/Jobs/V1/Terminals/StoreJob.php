@@ -12,9 +12,9 @@ class StoreJob extends BaseRequest
         $this->data['login'] = $data['login'];
         $this->data['password'] = $data['password'];
         $this->data['server_name'] = $data['server_name'];
-        $this->data['region'] = $data['region'];
         $this->data['version'] = $data['version'];
-        $this->data['project_id'] = $data['project_id'];
+        array_key_exists('region', $data) ?? $this->data['region'] = $data['region'];
+        array_key_exists('project_id', $data) ?? $this->data['project_id'] = $data['project_id'];
         array_key_exists('server_file', $data) ?? $this->data['server_file'] = $data['server_file'];
         $this->key = $key;
     }

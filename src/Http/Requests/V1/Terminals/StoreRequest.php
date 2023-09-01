@@ -20,8 +20,8 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'nullable|string',
             'tags' => 'nullable|string|max:255',
-            'project_id' => 'required|uuid',
-            'region' => 'required|integer|in:'.implode(',', Region::toArray()),
+            'project_id' => 'nullable|uuid',
+            'region' => 'nullable|integer|in:'.implode(',', Region::toArray()),
             'version' => 'required|integer|in:'.implode(',', Version::toArray()),
             'login' => 'required|string',
             'password' => 'required|string',
