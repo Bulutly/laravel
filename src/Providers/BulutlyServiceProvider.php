@@ -19,7 +19,7 @@ class BulutlyServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../Config/config.php' => config_path('bulutly.php'),
-            ], 'config');
+            ], 'bulutly-config');
         }
     }
 
